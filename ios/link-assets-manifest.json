@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Handjet.ttf",
+      "sha1": "8eca9200544f66d603f59a39cfa7cf73ea2349f1"
+    },
+    {
+      "path": "assets/fonts/Montserrat.ttf",
+      "sha1": "6b57d12e018c64352e202f8ef3bf7f431f76d935"
+    }
+  ]
+}
