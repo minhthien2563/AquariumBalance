@@ -5,9 +5,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import ArrowIcon from 'react-native-vector-icons/Entypo';
 import {useNavigation} from '@react-navigation/native';
 import routes from '../constants/routes';
+import {userState} from '../state';
+import {useAtom} from 'jotai';
 
 const Account_Tab = () => {
   const navigation = useNavigation();
+  const [user] = useAtom(userState);
+
   return (
     <SafeAreaView style={styles.container}>
       <Text
@@ -32,7 +36,7 @@ const Account_Tab = () => {
           resizeMode="center"
           style={styles.imageAvt}></Image>
         <View style={styles.account}>
-          <Text style={styles.accountName}>Minh Thiện</Text>
+          <Text style={styles.accountName}>{user.userName}</Text>
           <Text style={styles.levelMember}>Silver member</Text>
         </View>
       </View>
@@ -56,23 +60,9 @@ const Account_Tab = () => {
           />
         </TouchableOpacity>
 
-        {/* <TouchableOpacity style={styles.containerItem}>
-          <Icon
-            name="file-document-multiple-outline"
-            size={25}
-            style={styles.iconItem}></Icon>
-          <View style={styles.contentItem}>
-            <Text style={styles.titleItem}>Đơn hẹn</Text>
-            <Text>Xem các đơn hẹn của bạn</Text>
-          </View>
-          <ArrowIcon
-            name="chevron-right"
-            size={25}
-            style={styles.iconArrowItem}
-          />
-        </TouchableOpacity> */}
-
-        <TouchableOpacity style={styles.containerItem}>
+        <TouchableOpacity
+          style={styles.containerItem}
+          onPress={() => navigation.navigate(routes.DASHBOARD)}>
           <Icon name="logout" size={25} style={styles.iconItem}></Icon>
           <View style={styles.contentItem}>
             <Text style={styles.titleItem}>Đăng xuất</Text>

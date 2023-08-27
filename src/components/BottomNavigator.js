@@ -6,6 +6,7 @@ import routes from '../constants/routes';
 import Home_Tab from '../screens/Home_Tab';
 import Account_Tab from '../screens/Account_Tab';
 import Appointments_Tab from '../screens/Appointments_Tab';
+import Chat_Tab from '../screens/Chat_Tab';
 
 function SettingsScreen() {
   return (
@@ -31,7 +32,7 @@ const BottomNavigator = () => {
             iconName = 'home';
           } else if (route.name === routes.APPOINTMENTS_TAB) {
             iconName = 'file-document';
-          } else if (route.name === routes.DISCUSSION) {
+          } else if (route.name === routes.CHAT_TAB) {
             iconName = 'chat';
           } else if (route.name === routes.ACCOUNT_TAB) {
             iconName = 'account';
@@ -42,7 +43,7 @@ const BottomNavigator = () => {
       })}>
       <Tab.Screen name={routes.HOME_TAB} component={Home_Tab} />
       <Tab.Screen name={routes.APPOINTMENTS_TAB} component={Appointments_Tab} />
-      <Tab.Screen name={routes.DISCUSSION} component={SettingsScreen} />
+      <Tab.Screen name={routes.CHAT_TAB} component={Chat_Tab} />
       <Tab.Screen name={routes.ACCOUNT_TAB} component={Account_Tab} />
     </Tab.Navigator>
   );

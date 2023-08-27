@@ -6,13 +6,15 @@ import CustomButton from '../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import routes from '../constants/routes';
 import * as RNFS from 'react-native-fs';
-import {AgendaList} from 'react-native-calendars';
+import {useAtom} from 'jotai';
+import {userState} from '../state';
 
 const SignIn = () => {
   const navigation = useNavigation();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [user, setUser] = useAtom(userState);
 
   const onForgetPassword = () => {
     navigation.navigate(routes.FORGOT_PASSWORD);
@@ -45,6 +47,12 @@ const SignIn = () => {
 
     if (userFound) {
       if (userFind.password === password) {
+        console.log(userFind);
+        setUser({
+          email: userFind.email,
+          password: userFind.password,
+          userName: userFind.userName,
+        });
         navigation.navigate(routes.HOME);
       } else {
         Alert.alert('Error', 'Mật khẩu không chính xác!');
@@ -52,6 +60,18 @@ const SignIn = () => {
     } else {
       Alert.alert('Error', 'Không tìm thấy tài khoản này!');
       return;
+    }
+  };
+
+  const [showPassword, setShowPassword] = useState(true);
+  const [passwordIcon, setPasswordIcon] = useState('eye');
+  const handleIconPress = iconName => {
+    if (passwordIcon === 'eye') {
+      setPasswordIcon('eye-slash');
+      setShowPassword(false);
+    } else {
+      setPasswordIcon('eye');
+      setShowPassword(true);
     }
   };
 
@@ -75,8 +95,9 @@ const SignIn = () => {
           value={password}
           onChangeText={setPassword}
           placeHolder="Mật khẩu"
-          secureTextEntry
-          iconName={'eye'}
+          secureTextEntry={showPassword}
+          iconName={passwordIcon}
+          onPressIcon={handleIconPress}
         />
 
         <TouchableOpacity onPress={onForgetPassword}>

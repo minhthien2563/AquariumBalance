@@ -2,8 +2,12 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Entypo';
+import CustomButton from '../components/CustomButton';
+import {useNavigation} from '@react-navigation/native';
+import routes from '../constants/routes';
 
 const FinishAppointment = () => {
+  const navigation = useNavigation();
   return (
     <SafeAreaView>
       <View style={styles.containerInbound}>
@@ -15,6 +19,11 @@ const FinishAppointment = () => {
           Lịch hẹn trước của bạn đã đặt thành công hãy nhớ chú ý điện thoại từ
           nhân viên
         </Text>
+        <CustomButton
+          text="Hoàn tất"
+          type="SECONDARY"
+          onPress={() => navigation.navigate(routes.HOME_TAB)}
+        />
       </View>
     </SafeAreaView>
   );
@@ -50,5 +59,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     textAlign: 'center',
+    padding: 10,
   },
 });

@@ -7,15 +7,18 @@ import {
 } from 'react-native';
 import React from 'react';
 import CustomInput from '../components/CustomInput';
-import ArrowIcon from 'react-native-vector-icons/Entypo';
 import CustomButton from '../components/CustomButton';
+import {useAtom, useAtomValue} from 'jotai';
+import {userState} from '../state';
 
 const AccountSetting = () => {
+  const [user] = useAtom(userState);
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.headerText}>Thay đổi thông tin</Text>
-      <CustomInput label="Họ và Tên" placeHolder="Minh Thiện" />
-      <CustomInput label="Email" placeHolder="test@gmail.com" />
+      <CustomInput label="Họ và Tên" placeHolder={user.userName} />
+      <CustomInput label="Email" placeHolder={user.email} />
 
       <View style={{paddingVertical: 40}}>
         <Text style={styles.headerText}>Thay đổi mật khẩu</Text>

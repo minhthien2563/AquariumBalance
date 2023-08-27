@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   service: {
+    marginVertical: 5,
     borderWidth: 1,
     borderColor: '#e8e8e8',
     borderRadius: 10,

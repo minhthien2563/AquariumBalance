@@ -9,7 +9,7 @@ export default {
   HOME: 'Home',
   HOME_TAB: 'Home Tab',
   APPOINTMENTS_TAB: 'Appointments Tab',
-  DISCUSSION: 'Discussion',
+  CHAT_TAB: 'Chat Tab',
   ACCOUNT_TAB: 'Account Tab',
 
   PERSON: 'Person',

@@ -26,24 +26,24 @@ const SignUp = () => {
   };
 
   const onSignUp = async () => {
-    // if (!email.includes('@')) return setError('Email không hợp lệ.');
+    if (!email.includes('@')) return setError('Email không hợp lệ.');
 
-    // const regex_username =
-    //   /^(?=[a-zA-Z0-9._]{6,32}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
-    // if (!regex_username.test(userName))
-    //   return setError('Tên đăng nhập không hợp lệ');
+    const regex_username =
+      /^(?=[a-zA-Z0-9._]{6,32}$)(?!.*[_.]{2})[^_.].*[^_.]$/;
+    if (!regex_username.test(userName))
+      return setError('Tên đăng nhập không hợp lệ');
 
-    // const regex_password =
-    //   /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
-    // if (!regex_password.test(password))
-    //   return setError(
-    //     'Mật khẩu phải có ít nhất 6 kí tự, 1 chữ hoa, 1 kí tự đặc biệt và 1 chữ số.',
-    //   );
+    const regex_password =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+    if (!regex_password.test(password))
+      return setError(
+        'Mật khẩu phải có ít nhất 6 kí tự, 1 chữ hoa, 1 kí tự đặc biệt và 1 chữ số.',
+      );
 
-    // if (!repeatPassword.match(password))
-    //   return setError('Mật khẩu nhập lại không trùng khớp với mật khẩu.');
+    if (!repeatPassword.match(password))
+      return setError('Mật khẩu nhập lại không trùng khớp với mật khẩu.');
 
-    // setError('');
+    setError('');
 
     const filePath = RNFS.DocumentDirectoryPath + '/users.json';
 
@@ -71,12 +71,35 @@ const SignUp = () => {
     // Ghi dữ liệu mới vào tệp JSON
     try {
       await RNFS.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
-      Alert.alert('Success', 'Account registered successfully');
+      Alert.alert('Success', 'Đăng ký tài khoản thành công!');
+      navigation.navigate(routes.SIGN_IN);
     } catch (error) {
       console.error('Error writing JSON file:', error);
     }
+  };
 
-    // navigation.navigate(routes.SIGN_UP_AUTH);
+  const [showPassword, setShowPassword] = useState(true);
+  const [passwordIcon, setPasswordIcon] = useState('eye');
+  const handleIconPress = iconName => {
+    if (passwordIcon === 'eye') {
+      setPasswordIcon('eye-slash');
+      setShowPassword(false);
+    } else {
+      setPasswordIcon('eye');
+      setShowPassword(true);
+    }
+  };
+
+  const [showRepeatPassword, setShowRepeatPassword] = useState(true);
+  const [repeatPasswordIcon, setRepeatPasswordIcon] = useState('eye');
+  const handleRepeatIconPress = iconName => {
+    if (repeatPasswordIcon === 'eye') {
+      setRepeatPasswordIcon('eye-slash');
+      setShowRepeatPassword(false);
+    } else {
+      setRepeatPasswordIcon('eye');
+      setShowRepeatPassword(true);
+    }
   };
 
   //Email check có phải gmail hay ko, nếu ko thì show error đỏ ra màn hình
@@ -110,8 +133,9 @@ const SignUp = () => {
           value={password}
           onChangeText={setPassword}
           placeHolder="Mật khẩu"
-          secureTextEntry
-          iconName={'eye'}
+          secureTextEntry={showPassword}
+          iconName={passwordIcon}
+          onPressIcon={handleIconPress}
         />
 
         <CustomInput
@@ -119,8 +143,9 @@ const SignUp = () => {
           value={repeatPassword}
           onChangeText={setRepeatPassword}
           placeHolder="Nhập lại mật khẩu"
-          secureTextEntry
-          iconName={'eye'}
+          secureTextEntry={showRepeatPassword}
+          iconName={repeatPasswordIcon}
+          onPressIcon={handleRepeatIconPress}
         />
         <Text style={styles.errorText} onChangeText={onSignUp}>
           {error}

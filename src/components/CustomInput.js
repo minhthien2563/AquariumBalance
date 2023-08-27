@@ -16,6 +16,7 @@ const CustomInput = ({
   onEndEditing,
   secureTextEntry,
   iconName,
+  onPressIcon,
 }) => {
   return (
     <View style={styles.container}>
@@ -34,7 +35,13 @@ const CustomInput = ({
 
       <>
         {iconName ? (
-          <TouchableOpacity style={{justifyContent: 'center'}}>
+          <TouchableOpacity
+            style={{
+              justifyContent: 'center',
+              // backgroundColor: 'red',
+              paddingHorizontal: 10,
+            }}
+            onPress={() => onPressIcon(iconName)}>
             <Icon name={iconName} size={15} />
           </TouchableOpacity>
         ) : null}

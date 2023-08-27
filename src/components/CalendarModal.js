@@ -3,6 +3,16 @@ import React from 'react';
 import {Calendar, CalendarUtils} from 'react-native-calendars';
 
 const CalendarModal = ({visible, onDayPress}) => {
+  const getMinDate = () => {
+    var date = new Date().getDate();
+    var month = new Date().getMonth() + 1;
+    var year = new Date().getFullYear();
+
+    //Alert.alert(date + '-' + month + '-' + year);
+    // You can turn it in to your desired format
+    return year + '-' + month + '-' + date; //format: d-m-y;
+  };
+  console.log(getMinDate());
   return (
     <Modal visible={visible} transparent={true} animationType="slide">
       <View style={styles.bottomView}>
@@ -12,9 +22,10 @@ const CalendarModal = ({visible, onDayPress}) => {
             // Initially visible month. Default = now
             // initialDate={'2012-03-01'}
             // // Minimum date that can be selected, dates before minDate will be grayed out. Default = undefined
-            // minDate={'2012-05-10'}
+            minDate={getMinDate()}
+            // disabledByDefault
             // // Maximum date that can be selected, dates after maxDate will be grayed out. Default = undefined
-            // maxDate={'2012-05-30'}
+            maxDate={'2030-05-30'}
             // Handler which gets executed on day press. Default = undefined
             onDayPress={onDayPress}
             // Handler which gets executed on day long press. Default = undefined
@@ -32,7 +43,7 @@ const CalendarModal = ({visible, onDayPress}) => {
             // Replace default arrows with custom ones (direction can be 'left' or 'right')
             // renderArrow={direction => <Arrow />}
             // Do not show days of other months in month page. Default = false
-            hideExtraDays={true}
+            // hideExtraDays={true}
             // If hideArrows = false and hideExtraDays = false do not switch month when tapping on greyed out
             // day from another month that is visible in calendar page. Default = false
             // disableMonthChange={true}
@@ -51,7 +62,7 @@ const CalendarModal = ({visible, onDayPress}) => {
             // Disable right arrow. Default = false
             disableArrowRight={true}
             // Disable all touch events for disabled days. can be override with disableTouchEvent in markedDates
-            disableAllTouchEventsForDisabledDays={true}
+            // disableAllTouchEventsForDisabledDays={true}
             // Replace default month and year title with custom one. the function receive a date as parameter
             // renderHeader={date => {
             //   /*Return JSX*/

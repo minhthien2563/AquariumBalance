@@ -27,6 +27,7 @@ import ConfirmAppointment from './src/screens/ConfirmAppointment.js';
 import FinishAppointment from './src/screens/FinishAppointment.js';
 import Appointments_Tab from './src/screens/Appointments_Tab.js';
 import AccountSetting from './src/screens/AccountSetting.js';
+import Chat_Tab from './src/screens/Chat_Tab.js';
 
 const Stack = createNativeStackNavigator();
 
